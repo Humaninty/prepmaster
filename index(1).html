@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JEE NEET Prep - Mock Test Platform</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:#172033}
+header{background:#fff;border-bottom:1px solid #e7eaf0;position:sticky;top:0;z-index:10}
+.nav{max-width:1200px;margin:auto;padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:22px;font-weight:800;color:#2563eb}.logo span{color:#111827}
+nav a{margin-left:22px;text-decoration:none;color:#475569;font-weight:600}
+.hero{background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;padding:70px 20px}
+.hero-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:center}
+.hero h1{font-size:48px;line-height:1.08;margin-bottom:18px}.hero p{font-size:18px;line-height:1.6;opacity:.92}
+.btn{display:inline-block;border:0;border-radius:10px;padding:13px 20px;font-weight:700;cursor:pointer;text-decoration:none}
+.btn-light{background:#fff;color:#2563eb;margin-top:25px}.btn-primary{background:#2563eb;color:white}
+.hero-card{background:#fff;color:#172033;border-radius:18px;padding:25px;box-shadow:0 20px 50px #0003}
+.hero-card h3{margin-bottom:16px}.stat{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid #eee}
+section{max-width:1200px;margin:55px auto;padding:0 20px}
+.section-title{text-align:center;margin-bottom:28px}.section-title h2{font-size:32px;margin-bottom:8px}.muted{color:#64748b}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:#fff;padding:25px;border-radius:16px;border:1px solid #e8ebf0;box-shadow:0 8px 25px #17203308}
+.card h3{margin:12px 0}.icon{font-size:34px}
+.card p{color:#64748b;line-height:1.5;margin-bottom:15px}
+.test-box{background:#fff;padding:30px;border-radius:18px;border:1px solid #e5e7eb}
+.filters{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:20px 0}
+label{font-weight:700;font-size:14px}select,input{width:100%;padding:12px;margin-top:7px;border:1px solid #d7dce5;border-radius:9px;background:#fff}
+.quiz{display:none}.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.timer{font-weight:800;color:#dc2626}
+.question{font-size:20px;font-weight:700;line-height:1.5;margin:20px 0}
+.option{display:block;background:#f8fafc;border:1px solid #dce2ea;padding:14px;border-radius:10px;margin:10px 0;cursor:pointer}
+.option:hover{border-color:#2563eb;background:#eff6ff}.option input{width:auto;margin-right:10px}
+.actions{display:flex;gap:10px;margin-top:20px}.result{display:none;margin-top:25px}.score{font-size:36px;font-weight:800;color:#2563eb}
+.bar{height:12px;background:#e5e7eb;border-radius:20px;overflow:hidden;margin:8px 0 18px}.bar i{display:block;height:100%;width:0;background:#2563eb}
+.review{margin-top:25px}.review-item{padding:15px;border-radius:10px;margin:10px 0;background:#f8fafc}.correct{border-left:5px solid #16a34a}.wrong{border-left:5px solid #dc2626}
+footer{background:#111827;color:#cbd5e1;padding:35px 20px;text-align:center;margin-top:60px}
+@media(max-width:800px){.hero-inner,.cards,.filters{grid-template-columns:1fr}.hero h1{font-size:36px}nav{display:none}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="nav">
+<div class="logo">Prep<span>Master</span></div>
+<nav><a href="#home">Home</a><a href="#tests">Tests</a><a href="#pyq">PYQ</a><a href="#features">Features</a></nav>
+</div>
+</header>
+
+<main id="home">
+<div class="hero">
+<div class="hero-inner">
+<div>
+<h1>JEE & NEET Preparation, All in One Place</h1>
+<p>Practice previous-year questions, create chapter-wise tests and check your performance with instant results and explanations.</p>
+<a href="#tests" class="btn btn-light">Start a Test</a>
+</div>
+<div class="hero-card">
+<h3>Student Performance</h3>
+<div class="stat"><span>Questions Solved</span><b id="solved">0</b></div>
+<div class="stat"><span>Accuracy</span><b id="accuracy">0%</b></div>
+<div class="stat"><span>Tests Completed</span><b id="completed">0</b></div>
+</div>
+</div>
+</div>
+
+<section id="features">
+<div class="section-title"><h2>Everything You Need</h2><p class="muted">Built for focused JEE & NEET practice</p></div>
+<div class="cards">
+<div class="card"><div class="icon">📚</div><h3>Previous Year Questions</h3><p>Choose exam, year, subject and chapter to practice PYQs.</p></div>
+<div class="card"><div class="icon">🧠</div><h3>Custom Test Generator</h3><p>Select subject, chapter, topic and difficulty to create a test.</p></div>
+<div class="card"><div class="icon">📊</div><h3>Instant Analytics</h3><p>See score, accuracy, correct/wrong answers and explanations.</p></div>
+</div>
+</section>
+
+<section id="pyq">
+<div class="section-title"><h2>Previous Year Question Test</h2><p class="muted">Filter questions before starting</p></div>
+<div class="test-box">
+<div class="filters">
+<div><label>Exam</label><select id="pyqExam"><option>JEE Main</option><option>JEE Advanced</option><option>NEET</option></select></div>
+<div><label>Year</label><select id="pyqYear"><option>2026</option><option>2025</option><option>2024</option><option>2023</option><option>2022</option></select></div>
+<div><label>Subject</label><select id="pyqSubject"><option>Physics</option><option>Chemistry</option><option>Mathematics</option><option>Biology</option></select></div>
+<div><label>Chapter</label><select><option>Current Electricity</option><option>Electrostatics</option><option>Mechanics</option><option>Organic Chemistry</option><option>Human Physiology</option></select></div>
+<div><label>Questions</label><select id="questionCount"><option>10</option><option>20</option><option>30</option><option>50</option><option>60</option></select></div>
+</div>
+<button class="btn btn-primary" onclick="startTest()">Start PYQ Test</button>
+</div>
+</section>
+
+<section id="tests">
+<div class="section-title"><h2>Custom Test Generator</h2><p class="muted">Create a 50–60 question practice test</p></div>
+<div class="test-box">
+<div class="filters">
+<div><label>Exam</label><select><option>JEE Main</option><option>JEE Advanced</option><option>NEET</option></select></div>
+<div><label>Subject</label><select><option>Physics</option><option>Chemistry</option><option>Mathematics</option><option>Biology</option></select></div>
+<div><label>Level</label><select><option>Easy</option><option>Medium</option><option>Hard</option><option>Mixed</option></select></div>
+<div><label>Chapter</label><select><option>Choose Chapter</option><option>Electrostatics</option><option>Current Electricity</option><option>Mechanics</option><option>Thermodynamics</option></select></div>
+<div><label>Topic</label><select><option>Choose Topic</option><option>Electric Field</option><option>Potential</option><option>Resistance</option><option>Ohm's Law</option></select></div>
+<div><label>Number of Questions</label><select id="customCount"><option>50</option><option>60</option></select></div>
+</div>
+<button class="btn btn-primary" onclick="startCustomTest()">Generate Test</button>
+</div>
+</section>
+
+<section>
+<div class="test-box quiz" id="quiz">
+<div class="quiz-header"><b id="qno">Question 1</b><span class="timer">Time: <span id="time">10:00</span></span></div>
+<div class="question" id="question"></div>
+<div id="options"></div>
+<div class="actions">
+<button class="btn btn-primary" onclick="nextQuestion()">Next</button>
+<button class="btn" style="background:#e5e7eb" onclick="finishTest()">Submit Test</button>
+</div>
+</div>
+
+<div class="result test-box" id="result">
+<h2>Test Result</h2><br>
+<div class="score" id="score"></div>
+<p id="summary"></p><br>
+<p><b>Accuracy</b></p><div class="bar"><i id="accuracyBar"></i></div>
+<div class="cards" style="grid-template-columns:repeat(3,1fr)">
+<div class="card"><h3>Correct</h3><div id="correct" class="score" style="color:#16a34a"></div></div>
+<div class="card"><h3>Wrong</h3><div id="wrong" class="score" style="color:#dc2626"></div></div>
+<div class="card"><h3>Unattempted</h3><div id="unattempted" class="score" style="color:#64748b"></div></div>
+</div>
+<div class="review"><h3>Question Review</h3><div id="review"></div></div>
+</div>
+</section>
+</main>
+
+<footer>
+<p>© 2026 PrepMaster — JEE & NEET Preparation Platform</p>
+<p style="margin-top:8px">Demo version • Connect a database/question bank for production use.</p>
+</footer>
+
+<script>
+const questions=[
+ {q:"According to Ohm's law, the relation between voltage V, current I and resistance R is:",o:["V = IR","V = I/R","V = R/I","I = VR"],a:0,e:"Ohm's law states that V = IR when physical conditions remain constant."},
+ {q:"The SI unit of electric resistance is:",o:["Volt","Ohm","Ampere","Coulomb"],a:1,e:"Resistance is measured in ohms (Ω)."},
+ {q:"If the resistance of a conductor is doubled at constant voltage, the current becomes:",o:["Double","Half","Four times","Unchanged"],a:1,e:"From I = V/R, doubling R halves I."},
+ {q:"Electric current is defined as:",o:["Charge × time","Charge/time","Time/charge","Voltage/resistance"],a:1,e:"Current is the rate of flow of electric charge: I = Q/t."},
+ {q:"Which quantity is measured in volts?",o:["Current","Resistance","Potential difference","Charge"],a:2,e:"Potential difference is measured in volts."},
+ {q:"The dimensional formula of velocity is:",o:["LT⁻¹","LT","L²T⁻¹","MLT⁻¹"],a:0,e:"Velocity = displacement/time, so its dimension is LT⁻¹."},
+ {q:"A body moving with constant velocity has:",o:["Zero acceleration","Constant acceleration","Increasing acceleration","Infinite acceleration"],a:0,e:"Constant velocity means velocity does not change, so acceleration is zero."},
+ {q:"The slope of a displacement-time graph represents:",o:["Force","Velocity","Acceleration","Momentum"],a:1,e:"Slope = change in displacement/change in time = velocity."},
+ {q:"Which particle has no electric charge?",o:["Electron","Proton","Neutron","Ion"],a:2,e:"A neutron has zero net electric charge."},
+ {q:"The acceleration due to gravity near Earth's surface is approximately:",o:["9.8 m/s²","98 m/s²","0.98 m/s²","8.9 m/s²"],a:0,e:"Near Earth's surface, g is approximately 9.8 m/s²."}
+];
+
+let current=0, answers=[], testQuestions=[], seconds=600, timer;
+
+function startTest(){let n=+document.getElementById("questionCount").value;begin(n);}
+function startCustomTest(){let n=+document.getElementById("customCount").value;begin(n);}
+function begin(n){
+ testQuestions=[]; answers=[]; current=0; seconds= n*60;
+ for(let i=0;i<n;i++) testQuestions.push(questions[i%questions.length]);
+ document.getElementById("quiz").style.display="block";
+ document.getElementById("result").style.display="none";
+ document.getElementById("quiz").scrollIntoView({behavior:"smooth"});
+ clearInterval(timer); timer=setInterval(()=>{seconds--;renderTime();if(seconds<=0)finishTest()},1000);
+ renderQuestion();
+}
+function renderTime(){let m=Math.floor(seconds/60),s=seconds%60;document.getElementById("time").textContent=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;}
+function renderQuestion(){
+ let x=testQuestions[current];document.getElementById("qno").textContent=`Question ${current+1} of ${testQuestions.length}`;
+ document.getElementById("question").textContent=x.q;
+ document.getElementById("options").innerHTML=x.o.map((v,i)=>`<label class="option"><input type="radio" name="opt" value="${i}" ${answers[current]===i?"checked":""}> ${v}</label>`).join("");
+ renderTime();
+}
+document.addEventListener("change",e=>{if(e.target.name==="opt")answers[current]=+e.target.value});
+function nextQuestion(){if(current<testQuestions.length-1){current++;renderQuestion()}else finishTest();}
+function finishTest(){
+ clearInterval(timer);let correct=0,wrong=0;
+ testQuestions.forEach((x,i)=>{if(answers[i]===undefined){}else if(answers[i]===x.a)correct++;else wrong++});
+ let un=testQuestions.length-correct-wrong,acc=Math.round(correct/testQuestions.length*100);
+ document.getElementById("quiz").style.display="none";document.getElementById("result").style.display="block";
+ document.getElementById("score").textContent=`${correct} / ${testQuestions.length}`;
+ document.getElementById("summary").textContent=`You scored ${correct} correct answers with ${acc}% accuracy.`;
+ document.getElementById("correct").textContent=correct;document.getElementById("wrong").textContent=wrong;document.getElementById("unattempted").textContent=un;
+ document.getElementById("accuracyBar").style.width=acc+"%";
+ document.getElementById("review").innerHTML=testQuestions.map((x,i)=>{
+  let cls=answers[i]===undefined?"":answers[i]===x.a?"correct":"wrong";
+  let selected=answers[i]===undefined?"Not attempted":x.o[answers[i]];
+  return `<div class="review-item ${cls}"><b>Q${i+1}. ${x.q}</b><p>Your answer: ${selected}</p><p>Correct answer: ${x.o[x.a]}</p><p><b>Reason:</b> ${x.e}</p></div>`
+ }).join("");
+ document.getElementById("result").scrollIntoView({behavior:"smooth"});
+ document.getElementById("solved").textContent=testQuestions.length;
+ document.getElementById("accuracy").textContent=acc+"%";
+ document.getElementById("completed").textContent=1;
+}
+</script>
+</body>
+</html>
